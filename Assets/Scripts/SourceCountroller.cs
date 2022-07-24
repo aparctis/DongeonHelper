@@ -15,6 +15,10 @@ namespace Dungeon
 
         public bool RememberVolume = false;
 
+        //clip names
+        private string currentName;
+        private string nextName;
+
         [SerializeField]private float defoultVolume = 0.5f;
 
         void Start()
@@ -27,8 +31,9 @@ namespace Dungeon
             source.volume = soundVolume;
         }
 
-        public void NextClip(AudioClip clip)
+        public void NextClip(AudioClip clip, string name)
         {
+            nextName = name;
             nextClip = clip;
             if(nextClip!=null) Debug.Log("Clip Seted");
 
@@ -39,6 +44,7 @@ namespace Dungeon
             if(nextClip!=null)
             {
                 currentClip = nextClip;
+                currentName = nextName;
                 if (RememberVolume == false) soundVolume = defoultVolume;
                 source.clip = currentClip;
                 source.Play();

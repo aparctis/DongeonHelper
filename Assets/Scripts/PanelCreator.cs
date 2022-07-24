@@ -9,6 +9,8 @@ namespace Dungeon
         [SerializeField] private float cellSizeY;
         [SerializeField] private float yOffsets;
 
+        [SerializeField] private SourceCountroller source;
+
         public List<NewClipButton> buttons;
         public List<AudioClip> clips = new List<AudioClip>();
 
@@ -41,7 +43,7 @@ namespace Dungeon
         private void CreateButton(int clipNumber)
         {
             NewClipButton newButton = Instantiate(m_button, gameObject.transform);
-            newButton.SetClip(clips[clipNumber]);
+            newButton.SetClip(clips[clipNumber], source);
         }
 
         private void CreateOffset()

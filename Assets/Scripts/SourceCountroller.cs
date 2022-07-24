@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Dungeon
 {
@@ -8,12 +9,17 @@ namespace Dungeon
     {
         private AudioSource source;
 
-        private AudioClip currentClip;
-        private AudioClip nextClip;
+        [SerializeField]private AudioClip currentClip;
+        [SerializeField]private AudioClip nextClip;
 
         private float soundVolume;
 
         public bool RememberVolume = false;
+
+        //names of playlist
+        [SerializeField]private TMP_Text tmpNextName;
+        [SerializeField]private TMP_Text tmpCurrentName;
+
 
         //clip names
         private string currentName;
@@ -34,24 +40,31 @@ namespace Dungeon
         public void NextClip(AudioClip clip, string name)
         {
             nextName = name;
+            tmpNextName.text = nextName;
             nextClip = clip;
             if(nextClip!=null) Debug.Log("Clip Seted");
 
         }
 
-        public void PlaySound()
+        public void PlayNext()
         {
             if(nextClip!=null)
             {
                 currentClip = nextClip;
                 currentName = nextName;
+                tmpCurrentName.text = currentName;
                 if (RememberVolume == false) soundVolume = defoultVolume;
                 source.clip = currentClip;
                 source.Play();
-                Debug.Log("Clip Play");
+                Debug.Log("Next clip Play");
 
 
             }
+        }
+        public void PlayCurrent()
+        {
+            if (currentClip != null) source.Play();
+
         }
 
         public void StopSound()

@@ -19,6 +19,7 @@ namespace Dungeon
 
 
         [SerializeField] private AudioClip thisClip;
+        [SerializeField] private SourceCountroller m_source;
 
 
 
@@ -31,14 +32,15 @@ namespace Dungeon
 
         public void ButtonAction()
         {
-            Debug.Log(thisClip.name);
+            m_source.NextClip(thisClip, thisClip.name);
         }
 
-        public void SetClip (AudioClip clip)
+        public void SetClip (AudioClip clip, SourceCountroller source)
         {
             string newName = clip.name;
             InitialVoid();
             thisClip = clip;
+            m_source = source;
             Rename(newName);
 
         }

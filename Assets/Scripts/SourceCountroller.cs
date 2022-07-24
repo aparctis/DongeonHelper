@@ -38,6 +38,7 @@ namespace Dungeon
             source = GetComponent<AudioSource>();
             loopButtonSprite = loopButton.image;
             LoopButtonCheck();
+            soundVolume = defoultVolume;
         }
 
         private void FixedUpdate()
@@ -61,7 +62,7 @@ namespace Dungeon
                 currentClip = nextClip;
                 currentName = nextName;
                 tmpCurrentName.text = currentName;
-                if (RememberVolume == false) soundVolume = defoultVolume;
+                if (RememberVolume == false) source.volume = defoultVolume;
                 source.clip = currentClip;
                 source.Play();
                 Debug.Log("Next clip Play");

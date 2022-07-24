@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 
 namespace Dungeon
 {
@@ -11,6 +13,10 @@ namespace Dungeon
 
         [SerializeField]private AudioClip currentClip;
         [SerializeField]private AudioClip nextClip;
+
+        [SerializeField] private Button loopButton;
+
+        private Image loopButtonSprite;
 
         private float soundVolume;
 
@@ -30,6 +36,8 @@ namespace Dungeon
         void Start()
         {
             source = GetComponent<AudioSource>();
+            loopButtonSprite = loopButton.image;
+            LoopButtonCheck();
         }
 
         private void FixedUpdate()
@@ -79,9 +87,30 @@ namespace Dungeon
             soundVolume = vol;
         }
 
+        public void LoopChange()
+        {
+            if(source.loop==false)
+            {
+                source.loop = true;
+            }
+            else
+            {
+                source.loop = false;
+            }
+            LoopButtonCheck();
+        }
 
-
-
+        private void LoopButtonCheck()
+        {
+            if (source.loop == true)
+            {
+                loopButtonSprite.color = Color.white;
+            }
+            else
+            {
+                loopButtonSprite.color = Color.gray;
+            }
+        }
 
     }
 }
